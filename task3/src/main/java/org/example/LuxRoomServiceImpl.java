@@ -1,0 +1,27 @@
+package org.example;
+
+public class LuxRoomServiceImpl<T extends LuxRoom> implements LuxRoomService<T>{
+
+    @Override
+    public void foodDelivery(T room) {
+        System.out.println("Доставка продуктов в комнату: " + room);
+    }
+
+    @Override
+    public void clean(T room) {
+        System.out.println("Комната " + room + " очищена");
+    }
+
+    @Override
+    public void reserve(T room) throws RoomBookedException {
+        if(room.isBooked()) throw new RoomBookedException("Ошибка: комната " + room + " уже забронирована");
+        room.setBooked(true);
+        System.out.println("Комната " + room + " забронирована");
+    }
+
+    @Override
+    public void free(T room) {
+        room.setBooked(false);
+        System.out.println("Комната " + room + " освобождена");
+    }
+}
